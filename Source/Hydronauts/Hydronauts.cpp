@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "HydroNauts.h"
+#include "Hydronauts.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, HydroNauts, "HydroNauts" );
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, Hydronauts, "Hydronauts" );

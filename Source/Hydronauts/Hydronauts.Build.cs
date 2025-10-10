@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class HydroNauts : ModuleRules
+public class Hydronauts : ModuleRules
 {
-	public HydroNauts(ReadOnlyTargetRules Target) : base(Target)
+	public Hydronauts(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
