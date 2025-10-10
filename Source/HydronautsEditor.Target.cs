@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class HydronautsEditorTarget : TargetRules
+public class HydroNautsEditorTarget : TargetRules
 {
-	public HydronautsEditorTarget(TargetInfo Target) : base(Target)
+	public HydroNautsEditorTarget( TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
-		ExtraModuleNames.Add("Hydronauts");
+		ExtraModuleNames.Add("HydroNauts");
 	}
 }
