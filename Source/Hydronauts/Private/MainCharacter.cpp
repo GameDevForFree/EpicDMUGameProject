@@ -26,7 +26,12 @@ void AMainCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+
+		
 	}
+
+	
+
 }
 
 // Called every frame
