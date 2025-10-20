@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "MovingPlatform.h"
 #include "Components/BoxComponent.h"
 #include "Components/InterpToMovementComponent.h"
-#include "MovingPlatform.h"
+
 
 // Sets default values
 AMovingPlatform::AMovingPlatform()
