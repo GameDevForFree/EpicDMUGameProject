@@ -8,8 +8,7 @@ class UStaticMeshComponent;
 class UBoxComponent;
 
 UCLASS()
-//class FINALBUTTONPRESSTEST_API ACollectableOrb : public AActor
-class HYDRONAUTS_API ACollectableOrb : public AActor
+class FINALBUTTONPRESSTEST_API ACollectableOrb : public AActor
 {
     GENERATED_BODY()
 
@@ -18,6 +17,7 @@ public:
 
 protected:
     virtual void BeginPlay() override;
+    virtual void Tick(float DeltaTime) override;
 
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* OrbMesh;
@@ -25,7 +25,7 @@ protected:
     UPROPERTY(VisibleAnywhere)
     UBoxComponent* OrbTrigger;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
+    UPROPERTY(EditAnywhere)
     USoundBase* OrbCollectChime;
 
     UFUNCTION()

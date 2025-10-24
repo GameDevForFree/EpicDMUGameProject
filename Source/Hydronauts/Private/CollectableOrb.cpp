@@ -3,7 +3,6 @@
 #include "Components/BoxComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
-#include "Engine/Engine.h"
 
 ACollectableOrb::ACollectableOrb()
 {
@@ -11,40 +10,39 @@ ACollectableOrb::ACollectableOrb()
 
     OrbMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("OrbMesh"));
     RootComponent = OrbMesh;
-    OrbMesh->SetGenerateOverlapEvents(false);
 
     OrbTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("OrbTrigger"));
     OrbTrigger->SetupAttachment(OrbMesh);
-    OrbTrigger->SetBoxExtent(FVector(100.f));
-    OrbTrigger->SetGenerateOverlapEvents(true);
 
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/All/Game/Project_Assets_FBX_OBJ/Collectable/Relic_Orb"));
-    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/All/Game/Audio"));
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Game/Relic_Orb"));
+    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/orbsfx"));
 
-    if (SoundAsset.Succeeded())
-    {
-        OrbCollectChime = SoundAsset.Object;
-    }
-
-    if (MeshAsset.Succeeded())
-    {
-        OrbMesh->SetStaticMesh(MeshAsset.Object);
-
-    }
-
+    if (MeshAsset.Succeeded()) OrbMesh->SetStaticMesh(MeshAsset.Object);
+    if (SoundAsset.Succeeded()) OrbCollectChime = SoundAsset.Object;
 }
 
 void ACollectableOrb::BeginPlay()
 {
     Super::BeginPlay();
 
-    OrbTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    OrbTrigger->SetCollisionObjectType(ECC_WorldDynamic);
-    OrbTrigger->SetCollisionResponseToAllChannels(ECR_Overlap);
-    OrbMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
     OrbTrigger->OnComponentBeginOverlap.AddDynamic(this, &ACollectableOrb::OnMeshBeginOverlap);
+    OrbTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    OrbMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
 
+void ACollectableOrb::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+
+    float Time = GetGameTimeSinceCreation();
+
+
+    FVector OrbLocation = GetActorLocation();
+    OrbLocation.Z += FMath::Sin(Time * 2.f) * 20.f * DeltaTime;
+    SetActorLocation(OrbLocation);
+
+
+    AddActorLocalRotation(FRotator(0.f, 45.f * DeltaTime, 0.f));
 }
 
 void ACollectableOrb::OnMeshBeginOverlap(
@@ -55,13 +53,12 @@ void ACollectableOrb::OnMeshBeginOverlap(
     bool bFromSweep,
     const FHitResult& SweepResult)
 {
-    if (OtherActor && (OtherActor != this))
+    if (OtherActor && OtherActor != this)
     {
-
-        Destroy();
         UGameplayStatics::PlaySoundAtLocation(this, OrbCollectChime, GetActorLocation());
+        Destroy();
 
+        GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green,
+            FString::Printf(TEXT("50+"), *OtherActor->GetName()));
     }
 }
-
-
