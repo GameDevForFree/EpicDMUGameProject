@@ -40,9 +40,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* LookAction; /** Look Input Action */
 
-	void Move(const FInputActionValue& Value); /** Called for movement input */
+	void FMove(const FInputActionValue& Value); /** Called for movement input */
 
-	void Look(const FInputActionValue& Value); /** Called for looking input */
+	void FLook(const FInputActionValue& Value); /** Called for looking input */
 
 	void Jumping(); /** Called for Jumping input */
 };
