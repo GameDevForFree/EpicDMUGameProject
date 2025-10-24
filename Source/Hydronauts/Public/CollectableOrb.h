@@ -8,7 +8,8 @@ class UStaticMeshComponent;
 class UBoxComponent;
 
 UCLASS()
-class FINALBUTTONPRESSTEST_API ACollectableOrb : public AActor
+//class FINALBUTTONPRESSTEST_API ACollectableOrb : public AActor
+class HYDRONAUTS_API ACollectableOrb : public AActor
 {
     GENERATED_BODY()
 
