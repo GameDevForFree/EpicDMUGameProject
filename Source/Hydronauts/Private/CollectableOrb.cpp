@@ -14,8 +14,8 @@ ACollectableOrb::ACollectableOrb()
     OrbTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("OrbTrigger"));
     OrbTrigger->SetupAttachment(OrbMesh);
 
-    static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Game/Relic_Orb"));
-    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/orbsfx"));
+    static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Game/Project_Assets_FBX_OBJ/Collectable/Relic_Orb/Relic_Orb.Relic_Orb"));
+    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/orbsfx.orbsfx"));
 
     if (MeshAsset.Succeeded()) OrbMesh->SetStaticMesh(MeshAsset.Object);
     if (SoundAsset.Succeeded()) OrbCollectChime = SoundAsset.Object;
