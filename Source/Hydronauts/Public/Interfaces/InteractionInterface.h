@@ -7,7 +7,7 @@
 #include "InteractionInterface.generated.h"
 
 UENUM()
-enum class EInteractable : uint8
+enum class EInteractableType : uint8
 {
 	Pickup UMETA(DisplayName = "Pickup"),
 	NonPlayerCharacter UMETA(DisplayName = "NonPlayerCharacter"),
@@ -26,7 +26,7 @@ struct FInteractableData
 	Name(FText::GetEmpty()),
 	Action(FText::GetEmpty()),
 	Quantity(0),
-	InteractionDuration(0,0f)
+	InteractionDuration(0.0f)
 	{
 
 	};
