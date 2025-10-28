@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,36 +11,37 @@ class HYDRONAUTS_API AMainCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
+	
 	AMainCharacter();
 
 protected:
-	// Called when the game starts or when spawned
+	
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
+	
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
+	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	class UInputMappingContext* DefaultMappingContext; /**Link Mapping Context
-	file*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	class UInputAction* JumpAction; /** Jump Input Action */
+	class UInputMappingContext* DefaultMappingContext; 
+	
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	class UInputAction* MoveAction; /** Move Input Action */
+	class UInputAction* JumpAction; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	class UInputAction* LookAction; /** Look Input Action */
+	class UInputAction* MoveAction; 
 
-	void FMove(const FInputActionValue& Value); /** Called for movement input */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* LookAction; 
 
-	void FLook(const FInputActionValue& Value); /** Called for looking input */
+	void FMove(const FInputActionValue& Value);
 
-	void Jumping(); /** Called for Jumping input */
+	void FLook(const FInputActionValue& Value); 
+
+	void Jumping(); 
 };
