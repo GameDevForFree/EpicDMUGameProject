@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -25,19 +25,23 @@ protected:
         const FHitResult& SweepResult
     );
 
-
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Spawning")
-    FVector SpawnLocation = FVector(1160.f, 1190.f, 200.f);
+    FVector SpawnLocation = FVector(0.f, 0.f, 0.f);
+
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Spawning")
+    FRotator SpawnRotation = FRotator::ZeroRotator;
 
 private:
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(VisibleAnywhere, Category = "Components")
     UStaticMeshComponent* ButtonMesh;
 
-    UPROPERTY(VisibleAnywhere)
+    UPROPERTY(VisibleAnywhere, Category = "Components")
     class UBoxComponent* ButtonTrigger;
 
-    UPROPERTY(EditAnywhere)
+    UPROPERTY(EditAnywhere, Category = "Audio")
     USoundBase* ButtonPushSFX;
 
-    bool bPlatformHasSpawned = false;
+    bool bPlatformHasSpawned;
 };
