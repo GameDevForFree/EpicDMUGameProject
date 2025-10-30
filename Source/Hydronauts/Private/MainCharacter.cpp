@@ -93,22 +93,91 @@ void AMainCharacter::PerformInteractionCheck()
 
 void AMainCharacter::FoundInteractable(AActor* NewInteractable)
 {
+	if (IsInteracting())
+	{
+		EndInteract();
+	}
+
+	if (InteractionData.CurrentInteractable)
+	{
+		TargetInteractable = InteractionData.CurrentInteractable;
+		TargetInteractable->EndFocus();
+	}
+
+	InteractionData.CurrentInteractable = NewInteractable;
+	TargetInteractable = NewInteractable;
+
+	TargetInteractable->BeginFocus();
 }
 
 void AMainCharacter::NoInteractableFound()
 {
+	if (IsInteracting())
+	{
+		GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	}
+
+	if (InteractionData.CurrentInteractable)
+	{
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->EndFocus();
+		}
+
+		// Hide Interaction Widget on the HUD
+
+		InteractionData.CurrentInteractable = nullptr;
+		TargetInteractable = nullptr;
+	}
 }
 
 void AMainCharacter::BeginInteract()
 {
+	// Verify Nothing has Changed with the Interactable State Since Beginning Interaction
+
+	PerformInteractionCheck();
+
+	if (InteractionData.CurrentInteractable)
+	{
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->BeginInteract();
+			
+			if (FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))
+			{
+				Interact();
+			}
+
+			else
+			{
+				GetWorldTimerManager().SetTimer(TimerHandle_Interaction,
+					this,
+					&AMainCharacter::Interact,
+					TargetInteractable->InteractableData.InteractionDuration,
+					false);
+			}
+		}
+	}
 }
 
 void AMainCharacter::EndInteract()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->EndInteract();
+	}
 }
 
 void AMainCharacter::Interact()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->Interact();
+	}
 }
 
 // Called when the game starts or when spawned

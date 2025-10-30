@@ -34,6 +34,10 @@ public:
 	// Sets default values for this character's properties
 	AMainCharacter();
 
+	// Functions
+
+	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); };
+
 protected:
 	// Properties and Variables
 
