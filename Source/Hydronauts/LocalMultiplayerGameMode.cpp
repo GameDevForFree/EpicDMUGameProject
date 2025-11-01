@@ -2,6 +2,7 @@
 
 
 #include "LocalMultiplayerGameMode.h"
+#include "GameFramework/Controller.h"
 
 void ALocalMultiplayerGameMode::BeginPlay()
 {
