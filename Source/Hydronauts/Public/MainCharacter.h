@@ -14,6 +14,16 @@ public:
 	
 	AMainCharacter();
 
+	FVector LastCheckpointLocation;
+
+public:
+	void SetCheckpointLocation(FVector NewLocation) { LastCheckpointLocation = NewLocation; }
+	FVector GetCheckpointLocation() const { return LastCheckpointLocation; }
+
+	UFUNCTION(BlueprintCallable)
+	void RespawnAtCheckpoint();
+
+
 protected:
 	
 	virtual void BeginPlay() override;

@@ -1,4 +1,4 @@
-#include "PowerUpSpeed.h"
+﻿#include "PowerUpSpeed.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Character.h"
@@ -61,6 +61,14 @@ void APowerUpSpeed::Tick(float DeltaTime)
     AddActorLocalRotation(FRotator(0.f, 45.f * DeltaTime, 0.f));
 }
 
+void APowerUpSpeed::RespawnPowerUp()
+{
+    PUSMesh->SetVisibility(true);
+    PUSTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+
+    GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Power-Up Respawned!"));
+}
+
 void APowerUpSpeed::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
     UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -93,5 +101,12 @@ void APowerUpSpeed::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other
         Player->GetWorldTimerManager().SetTimer(ResetHandle, ResetDelegate, SpeedBoostDuration, false);
     }
 
-    Destroy();
+   
+    PUSMesh->SetVisibility(false);
+    PUSTrigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+ 
+    FTimerHandle RespawnHandle;
+    GetWorldTimerManager().SetTimer(RespawnHandle, this, &APowerUpSpeed::RespawnPowerUp, 5.0f, false);
 }
+

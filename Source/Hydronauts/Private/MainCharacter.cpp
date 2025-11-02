@@ -98,3 +98,13 @@ void AMainCharacter::Jumping()
 	Jump();
 }
 
+void AMainCharacter::RespawnAtCheckpoint()
+{
+	if (Controller)
+	{
+		SetActorLocation(LastCheckpointLocation);
+		// Optionally restore health, reset fall velocity, etc.
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Yellow, TEXT("Respawned at checkpoint!"));
+	}
+}
+
