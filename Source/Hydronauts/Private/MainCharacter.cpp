@@ -1,4 +1,6 @@
 ﻿#include "MainCharacter.h"
+#include "HydroSaveGame.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -98,3 +100,23 @@ void AMainCharacter::Jumping()
 	Jump();
 }
 
+// Below Added By Devin Brown P2798179
+void AMainCharacter::SaveGame()
+{
+	UHydroSaveGame* SaveGameInstance = Cast<UHydroSaveGame>(UGameplayStatics::CreateSaveGameObject(UHydroSaveGame::StaticClass()));
+
+	SaveGameInstance->WorldLocation = GetActorLocation();
+	SaveGameInstance->WorldRotation = GetActorRotation();
+
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SlotName, SaveGameInstance->SlotIndex);
+}
+
+void AMainCharacter::LoadGame()
+{
+	UHydroSaveGame* LoadGameInstance = Cast<UHydroSaveGame>(UGameplayStatics::CreateSaveGameObject(UHydroSaveGame::StaticClass()));
+
+	LoadGameInstance = Cast<UHydroSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadGameInstance->SlotName, LoadGameInstance->SlotIndex));
+
+	SetActorLocation(LoadGameInstance->WorldLocation);
+	SetActorRotation(LoadGameInstance->WorldRotation);
+}
