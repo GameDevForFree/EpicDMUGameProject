@@ -17,7 +17,7 @@ APlatformSpawner::APlatformSpawner()
     if (MeshAsset.Succeeded())
     {
         PlatformMesh->SetStaticMesh(MeshAsset.Object);
-        PlatformMesh->SetWorldScale3D(FVector(2.f, 2.f, 0.2f));
+        PlatformMesh->SetWorldScale3D(FVector(1.f, 1.f, 0.5f));
     }
 
     RunningTime = 0.f;
