@@ -90,7 +90,6 @@ void AMainCharacter::FLook(const FInputActionValue& Value)
 		
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
-		//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("added rotation")));
 	}
 }
 

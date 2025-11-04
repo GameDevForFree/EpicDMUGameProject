@@ -2,6 +2,7 @@
 
 
 #include "LevelWavepoint.h"
+#include "MainCharacter.h"
 //#include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -42,16 +43,16 @@ void ALevelWavepoint::PostInitializeComponents()
 
 void ALevelWavepoint::OnVolumeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (Cast<APlayerController>(OtherActor))
+	if (Cast<AMainCharacter>(OtherActor))
 	{
 		
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Yellow, FString::Printf(TEXT("added rotation")));
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("added rotation")));
 		////adds the level to a list
 		//GetWorld()->AddLevel(NextLevel);
 		////removed the current level from the list, forcing the player into the next one
 		//GetWorld()->RemoveLevel(GetWorld()->GetCurrentLevel());
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Yellow, FString::Printf(TEXT("detected collision")));
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("detected collision")));
 }
 
 void ALevelWavepoint::OnVolumeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
