@@ -1,5 +1,6 @@
 ﻿#include "MainCharacter.h"
 #include "HydroSaveGame.h"
+#include "SharkAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
@@ -100,6 +101,13 @@ void AMainCharacter::Jumping()
 	Jump();
 }
 
+// Added by Michael Threlfall P2797637
+void ASharkAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	MoveToActor(PlayerPawn, 10);
+}
+
 // Below Added By Devin Brown P2798179
 void AMainCharacter::SaveGame()
 {
@@ -120,3 +128,4 @@ void AMainCharacter::LoadGame()
 	SetActorLocation(LoadGameInstance->WorldLocation);
 	SetActorRotation(LoadGameInstance->WorldRotation);
 }
+
