@@ -14,7 +14,8 @@ class HYDRONAUTS_API ASharkAIController : public AAIController
 {
 	GENERATED_BODY()
 
-	protected:
+protected:
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaSeconds) override;
+	APawn* PlayerPawn;
 };
-

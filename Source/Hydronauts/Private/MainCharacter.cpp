@@ -1,7 +1,9 @@
 ﻿#include "MainCharacter.h"
+#include "SharkAIController.h"
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AMainCharacter::AMainCharacter()
@@ -98,3 +100,8 @@ void AMainCharacter::Jumping()
 	Jump();
 }
 
+void ASharkAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	MoveToActor(PlayerPawn, 10);
+}
