@@ -44,4 +44,16 @@ public:
 	void FLook(const FInputActionValue& Value); 
 
 	void Jumping(); 
+
+	// Below Added By Devin Brown P2798179
+public:
+
+	UFUNCTION(BlueprintCallable)
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable)
+	void LoadGame();
+
 };
+
+	 
