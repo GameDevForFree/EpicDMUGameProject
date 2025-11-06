@@ -2,15 +2,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "DoorDestroyButton.generated.h"
+#include "DoorDestroyButton2.generated.h"
 
 UCLASS()
-class HYDRONAUTS_API ADoorDestroyButton : public AActor
+class HYDRONAUTS_API ADoorDestroyButton2 : public AActor
 {
     GENERATED_BODY()
 
 public:
-    ADoorDestroyButton();
+    ADoorDestroyButton2();
 
 protected:
     UPROPERTY(VisibleAnywhere)

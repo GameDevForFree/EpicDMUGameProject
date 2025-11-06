@@ -24,9 +24,9 @@ AAudioTunnels::AAudioTunnels()
 		AudioMesh->SetWorldScale3D(FVector(1.f));
 	}
 
-	static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tunnelslevelmusicend2.tunnelslevelmusicend2"));
+	/* static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tunnelslevelmusicend2.tunnelslevelmusicend2"));
 	if (SoundAsset.Succeeded())
-		AudioTunnelSFX = SoundAsset.Object;
+		AudioTunnelSFX = SoundAsset.Object; */
 
 }
 

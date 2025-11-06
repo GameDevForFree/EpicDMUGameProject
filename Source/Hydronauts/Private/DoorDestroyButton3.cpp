@@ -1,10 +1,10 @@
-#include "DoorDestroyButton.h"
-#include "DestroyableDoor.h"
+#include "DoorDestroyButton3.h"
+#include "DestroyableDoor3.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/Engine.h"
 
-ADoorDestroyButton::ADoorDestroyButton()
+ADoorDestroyButton3::ADoorDestroyButton3()
 {
     PrimaryActorTick.bCanEverTick = false;
 
@@ -27,10 +27,10 @@ ADoorDestroyButton::ADoorDestroyButton()
     ButtonTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("ButtonTrigger"));
     ButtonTrigger->SetupAttachment(RootComponent);
     ButtonTrigger->SetBoxExtent(FVector(50.f));
-    ButtonTrigger->OnComponentBeginOverlap.AddDynamic(this, &ADoorDestroyButton::OnOverlap);
+    ButtonTrigger->OnComponentBeginOverlap.AddDynamic(this, &ADoorDestroyButton3::OnOverlap);
 }
 
-void ADoorDestroyButton::OnOverlap(
+void ADoorDestroyButton3::OnOverlap(
     UPrimitiveComponent* OverlappedComp,
     AActor* OtherActor,
     UPrimitiveComponent* OtherComp,
@@ -45,16 +45,16 @@ void ADoorDestroyButton::OnOverlap(
 
     // Find all DestroyableDoor actors
     TArray<AActor*> FoundDoors;
-    UGameplayStatics::GetAllActorsOfClass(World, ADestroyableDoor::StaticClass(), FoundDoors);
+    UGameplayStatics::GetAllActorsOfClass(World, ADestroyableDoor3::StaticClass(), FoundDoors);
 
     for (AActor* Door : FoundDoors)
     {
-        if (Door->ActorHasTag("MainDoor"))
+        if (Door->ActorHasTag("MainDoor3"))
         {
             Door->Destroy();
 
             if (GEngine)
-                GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("MainDoor destroyed!"));
+                GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("MainDoor3 destroyed!"));
             break;
         }
     }
