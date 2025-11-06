@@ -45,14 +45,10 @@ void ALevelWavepoint::OnVolumeBeginOverlap(UPrimitiveComponent* OverlappedCompon
 {
 	if (Cast<AMainCharacter>(OtherActor))
 	{
-		
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("added rotation")));
-		////adds the level to a list
-		//GetWorld()->AddLevel(NextLevel);
-		////removed the current level from the list, forcing the player into the next one
-		//GetWorld()->RemoveLevel(GetWorld()->GetCurrentLevel());
+		GetWorld()->ServerTravel(NextLevel->GetPathName());
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Orange, NextLevel->GetPathName());
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("detected collision")));
+	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("detected collision")));
 }
 
 void ALevelWavepoint::OnVolumeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
