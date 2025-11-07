@@ -17,6 +17,6 @@ class HYDRONAUTS_API ASharkAIController : public AAIController
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
-	virtual void LineOfSightTo(AActor);
+	void LineOfSightTo(AActor* targetActor);
 	APawn* PlayerPawn;
 };

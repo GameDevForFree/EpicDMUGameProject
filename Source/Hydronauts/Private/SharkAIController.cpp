@@ -11,3 +11,14 @@ void ASharkAIController::BeginPlay()
 
 	SetFocus(PlayerPawn);
 }
+
+// Added by Michael Threlfall P2797637
+void ASharkAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	MoveToActor(PlayerPawn, 10);
+}
+
+void ASharkAIController::LineOfSightTo(AActor* targetActor)
+{
+}
