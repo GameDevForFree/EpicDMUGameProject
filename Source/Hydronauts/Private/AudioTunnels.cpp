@@ -26,7 +26,7 @@ AAudioTunnels::AAudioTunnels()
 
 	static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tunnelslevelmusicend2.tunnelslevelmusicend2"));
 	if (SoundAsset.Succeeded())
-		AudioTunnelSFX = SoundAsset.Object;
+		AudioTunnelSFX = SoundAsset.Object; 
 
 }
 

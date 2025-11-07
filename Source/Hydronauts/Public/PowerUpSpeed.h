@@ -12,6 +12,10 @@ class HYDRONAUTS_API APowerUpSpeed : public AActor
 public:
     APowerUpSpeed();
 
+    UFUNCTION()
+    void RespawnPowerUp();
+
+
 protected:
     virtual void BeginPlay() override;
 
