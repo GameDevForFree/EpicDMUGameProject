@@ -8,7 +8,7 @@ ADoorDestroyButton3::ADoorDestroyButton3()
 {
     PrimaryActorTick.bCanEverTick = false;
 
-    // Mesh
+   
     ButtonMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ButtonMesh"));
     RootComponent = ButtonMesh;
 
@@ -23,7 +23,7 @@ ADoorDestroyButton3::ADoorDestroyButton3()
         ButtonMesh->SetWorldScale3D(FVector(1.f));
     }
 
-    // Trigger box
+    
     ButtonTrigger = CreateDefaultSubobject<UBoxComponent>(TEXT("ButtonTrigger"));
     ButtonTrigger->SetupAttachment(RootComponent);
     ButtonTrigger->SetBoxExtent(FVector(50.f));
@@ -43,7 +43,7 @@ void ADoorDestroyButton3::OnOverlap(
     UWorld* World = GetWorld();
     if (!World) return;
 
-    // Find all DestroyableDoor actors
+  
     TArray<AActor*> FoundDoors;
     UGameplayStatics::GetAllActorsOfClass(World, ADestroyableDoor3::StaticClass(), FoundDoors);
 
@@ -59,6 +59,6 @@ void ADoorDestroyButton3::OnOverlap(
         }
     }
 
-    // Disable trigger after use
+  
     ButtonTrigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }

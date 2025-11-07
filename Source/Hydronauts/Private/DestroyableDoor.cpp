@@ -3,7 +3,7 @@
 #include "Engine/Engine.h"
 #include "UObject/ConstructorHelpers.h"
 
-// Sets default values
+
 ADestroyableDoor::ADestroyableDoor()
 {
 
