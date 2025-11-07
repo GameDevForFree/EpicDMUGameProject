@@ -3,22 +3,29 @@
 
 #include "SharkAIController.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/Character.h"
 
 void ASharkAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-
-	SetFocus(PlayerPawn);
 }
 
-// Added by Michael Threlfall P2797637
 void ASharkAIController::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	MoveToActor(PlayerPawn, 10);
-}
 
-void ASharkAIController::LineOfSightTo(AActor* targetActor)
-{
+	if (PlayerPawn)
+	{
+		if (LineOfSightTo(PlayerPawn))
+		{
+			SetFocus(PlayerPawn);
+			MoveToActor(PlayerPawn, 5.0f);
+		}
+		else
+		{
+			ClearFocus(EAIFocusPriority::Gameplay);
+			StopMovement();
+		}
+	}
 }
