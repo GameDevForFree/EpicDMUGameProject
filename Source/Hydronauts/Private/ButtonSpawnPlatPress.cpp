@@ -1,5 +1,6 @@
 ﻿#include "ButtonSpawnPlatPress.h"
 #include "PlatformSpawner.h"
+#include "MovingPlatform.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "UObject/ConstructorHelpers.h"

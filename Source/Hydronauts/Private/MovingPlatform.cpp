@@ -8,7 +8,7 @@
 // Sets default values
 AMovingPlatform::AMovingPlatform()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to call Tick() every frame.
 	PrimaryActorTick.bCanEverTick = true;
 
 	BoxCollider = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
@@ -19,7 +19,7 @@ AMovingPlatform::AMovingPlatform()
 
 	MovementComponent = CreateDefaultSubobject<UInterpToMovementComponent>(TEXT("Movement Component"));
 
-	//setting up default parameters
+	//Setting up default parameters
 	MovementComponent->Duration = 5.0f;
 	MovementComponent->bSweep = true;
 	MovementComponent->BehaviourType = EInterpToBehaviourType::PingPong;
@@ -30,7 +30,7 @@ void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//setting up the control points for movement down the path
+	//Setting up the control points for movement down the path
 	MovementComponent->ControlPoints.Add(FInterpControlPoint(FVector(0.f, 0.f, 0.f), true));
 	for (int i = 0; i < ThePath.Num(); i++) 
 	{
