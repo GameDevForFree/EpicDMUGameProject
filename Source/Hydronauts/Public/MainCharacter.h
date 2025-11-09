@@ -21,7 +21,7 @@ public:
 	FVector GetCheckpointLocation() const { return LastCheckpointLocation; }
 
 	UFUNCTION(BlueprintCallable)
-	void RespawnAtCheckpoint();
+	void RespawnAtCheckpoint(); 
 
 
 protected:

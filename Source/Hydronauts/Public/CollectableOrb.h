@@ -6,6 +6,7 @@
 
 class UStaticMeshComponent;
 class UBoxComponent;
+class USoundBase;
 
 UCLASS()
 class HYDRONAUTS_API ACollectableOrb : public AActor
