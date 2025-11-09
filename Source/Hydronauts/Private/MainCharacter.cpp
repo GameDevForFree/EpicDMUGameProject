@@ -14,6 +14,10 @@ AMainCharacter::AMainCharacter()
 
 }
 
+void AMainCharacter::RespawnAtCheckpoint()
+{
+}
+
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
