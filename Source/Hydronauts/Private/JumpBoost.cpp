@@ -36,7 +36,7 @@ AJumpBoost::AJumpBoost()
 
 
     JumpBoostMultiplier = 2.0f;
-    JumpBoostDuration = 6.0f;
+    JumpBoostDuration = 4.0f;
 }
 
 void AJumpBoost::BeginPlay()
@@ -59,6 +59,14 @@ void AJumpBoost::Tick(float DeltaTime)
     SetActorLocation(Loc);
 
     AddActorLocalRotation(FRotator(0.f, 45.f * DeltaTime, 0.f));
+}
+
+void AJumpBoost::RespawnPowerUp()
+{
+    JBMesh->SetVisibility(true);
+    JBTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+
+    GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Power-Up Respawned!"));
 }
 
 void AJumpBoost::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
@@ -93,6 +101,10 @@ void AJumpBoost::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
         Player->GetWorldTimerManager().SetTimer(ResetHandle, ResetDelegate, JumpBoostDuration, false);
     }
 
+    JBMesh->SetVisibility(false);
+    JBTrigger->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-    Destroy();
+
+    FTimerHandle RespawnHandle;
+    GetWorldTimerManager().SetTimer(RespawnHandle, this, &AJumpBoost::RespawnPowerUp, 5.0f, false);
 }

@@ -12,6 +12,9 @@ class HYDRONAUTS_API AJumpBoost : public AActor
 public:
     AJumpBoost();
 
+    UFUNCTION()
+    void RespawnPowerUp();
+
 protected:
     virtual void BeginPlay() override;
 

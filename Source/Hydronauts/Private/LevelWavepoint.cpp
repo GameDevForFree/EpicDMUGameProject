@@ -2,6 +2,8 @@
 
 
 #include "LevelWavepoint.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/Character.h"
 #include "MainCharacter.h"
 //#include "Kismet/GameplayStatics.h"
 
@@ -45,14 +47,14 @@ void ALevelWavepoint::OnVolumeBeginOverlap(UPrimitiveComponent* OverlappedCompon
 {
 	if (Cast<AMainCharacter>(OtherActor))
 	{
-		GetWorld()->ServerTravel(NextLevel->GetPathName());
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Orange, NextLevel->GetPathName());
+		UGameplayStatics::OpenLevel(GetWorld(), NextLevel);
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Orange, FString::Printf(TEXT("Teleporting...")));
 	}
 	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Yellow, FString::Printf(TEXT("detected collision")));
 }
+
 
 void ALevelWavepoint::OnVolumeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	//triggers on collision exit
 }
-
