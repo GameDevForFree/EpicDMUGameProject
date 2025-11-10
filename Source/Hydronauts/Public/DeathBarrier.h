@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "HydroSaveGame.h"
 #include "DeathBarrier.generated.h"
 
 UCLASS()
