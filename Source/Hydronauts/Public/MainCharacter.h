@@ -16,6 +16,8 @@ public:
 
 	FVector LastCheckpointLocation;
 
+//Code below by Alex
+
 public:
 	void SetCheckpointLocation(FVector NewLocation) { LastCheckpointLocation = NewLocation; }
 	FVector GetCheckpointLocation() const { return LastCheckpointLocation; }
@@ -23,6 +25,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RespawnAtCheckpoint(); 
 
+//Code below by Cory P2803594
 
 protected:
 	

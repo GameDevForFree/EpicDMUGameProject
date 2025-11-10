@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
+//Code below by Cory P2803594
+
 #include "LevelWavepoint.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
 #include "MainCharacter.h"
-//#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ALevelWavepoint::ALevelWavepoint()
@@ -45,6 +46,8 @@ void ALevelWavepoint::PostInitializeComponents()
 
 void ALevelWavepoint::OnVolumeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	//If the Actor colliding with this Actor is the Main Character (player).
+	//Open the next level given by a FName which can be accessed and modified anywhere
 	if (Cast<AMainCharacter>(OtherActor))
 	{
 		UGameplayStatics::OpenLevel(GetWorld(), NextLevel);

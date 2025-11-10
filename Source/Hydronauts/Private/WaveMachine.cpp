@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+//Code Added below by Cory P2803594
 
 #include "WaveMachine.h"
 
@@ -18,8 +19,8 @@ void AWaveMachine::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//Creates an array of points spaced equally out to make a grid like pattern
 	int i, j;
-
 	for (i = 0; i < WaveAmountLength; i++) 
 	{
 		for (j = 0; j < WaveAmountWidth; j++) 
@@ -39,6 +40,7 @@ void AWaveMachine::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	//Displaces the points based on a wave function which takes in a vector
 	for (auto i = QuadArray.begin(); i != QuadArray.end(); ++i)
 	{
 		ApplyWave(**i);
@@ -47,11 +49,13 @@ void AWaveMachine::Tick(float DeltaTime)
 	Draw();
 }
 
+//moves coordinates around based on the sin, and cos of the current time
 void AWaveMachine::ApplyWave(FVector& wave)
 {
 	wave = FVector(wave.X, wave.Y, sinh(wave.Y)+cosh(wave.X));
 }
 
+//displays a grid of spheres using unreals debug sphere function
 void AWaveMachine::Draw()
 {
 	for (auto i = QuadArray.begin(); i != QuadArray.end(); ++i)
@@ -59,4 +63,3 @@ void AWaveMachine::Draw()
 		DrawDebugSphere(GetWorld(),**i, 10.f, 6, FColor::Blue);
 	}
 }
-
