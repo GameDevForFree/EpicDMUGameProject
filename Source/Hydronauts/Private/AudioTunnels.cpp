@@ -35,7 +35,7 @@ void AAudioTunnels::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UGameplayStatics::PlaySoundAtLocation(this, AudioTunnelSFX, GetActorLocation());
+	// UGameplayStatics::PlaySoundAtLocation(this, AudioTunnelSFX, GetActorLocation());
 	
 }
 

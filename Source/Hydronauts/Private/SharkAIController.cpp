@@ -1,32 +1,48 @@
-// This is all code by Michael Threlfall P2797637
-
+﻿// This is all code by Michael Threlfall P2797637
 
 #include "SharkAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
+#include "UObject/ConstructorHelpers.h"
+
+ASharkAIController::ASharkAIController()
+{
+    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tralalerotralala.tralalerotralala"));
+    if (SoundAsset.Succeeded())
+    {
+        SharkSFX = SoundAsset.Object;
+    }
+}
 
 void ASharkAIController::BeginPlay()
 {
-	Super::BeginPlay();
-	// Gets the players character
-	PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    Super::BeginPlay();
+    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 }
 
 void ASharkAIController::Tick(float DeltaSeconds)
 {
-	Super::Tick(DeltaSeconds);
-	// Shark loses focus of Player if something is obstructing its view
-	if (PlayerPawn)
-	{
-		if (LineOfSightTo(PlayerPawn))
-		{
-			SetFocus(PlayerPawn);
-			MoveToActor(PlayerPawn, 5.0f);
-		}
-		else
-		{
-			ClearFocus(EAIFocusPriority::Gameplay);
-			StopMovement();
-		}
-	}
+    Super::Tick(DeltaSeconds);
+
+    APawn* ControlledPawn = GetPawn();
+    if (!ControlledPawn || !PlayerPawn)
+        return;
+
+    if (LineOfSightTo(PlayerPawn))
+    {
+        SetFocus(PlayerPawn);
+        MoveToActor(PlayerPawn, 5.0f);
+
+       
+        if (!bHasPlayedSound && SharkSFX)
+        {
+            UGameplayStatics::PlaySoundAtLocation(this, SharkSFX, ControlledPawn->GetActorLocation());
+            bHasPlayedSound = true; // mark as played
+        }
+    }
+    else
+    {
+        ClearFocus(EAIFocusPriority::Gameplay);
+        StopMovement();
+    }
 }

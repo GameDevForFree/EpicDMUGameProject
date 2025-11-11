@@ -1,4 +1,4 @@
-// This is all code by Michael Threlfall P2797637
+﻿// This is all code by Michael Threlfall P2797637
 
 #pragma once
 
@@ -6,18 +6,23 @@
 #include "AIController.h"
 #include "SharkAIController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class HYDRONAUTS_API ASharkAIController : public AAIController
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
+
+public:
+   
+    ASharkAIController();
 
 protected:
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaSeconds) override;
+    virtual void BeginPlay() override;
+    virtual void Tick(float DeltaSeconds) override;
+
+    UPROPERTY(EditAnywhere, Category = "Audio")
+    USoundBase* SharkSFX;
 
 private:
-	APawn* PlayerPawn;
+    APawn* PlayerPawn;
+    bool bHasPlayedSound = false; // only play once
 };
