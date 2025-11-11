@@ -66,7 +66,6 @@ void AJumpBoost::RespawnPowerUp()
     JBMesh->SetVisibility(true);
     JBTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
-    GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Power-Up Respawned!"));
 }
 
 void AJumpBoost::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

@@ -18,8 +18,11 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Score")
     void AddScore(int32 Points);
 
+    UFUNCTION(BlueprintCallable, Category = "Score")
+    void SubtractScore(int32 Points); // NEW
+
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-    TSubclassOf<UUserWidget> ScoreWidgetClass; // assign WBP_ScoreHUD in Editor
+    TSubclassOf<UUserWidget> ScoreWidgetClass;
 
 private:
     int32 PlayerScore;

@@ -66,7 +66,6 @@ void APowerUpSpeed::RespawnPowerUp()
     PUSMesh->SetVisibility(true);
     PUSTrigger->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
-    GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Power-Up Respawned!"));
 }
 
 void APowerUpSpeed::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

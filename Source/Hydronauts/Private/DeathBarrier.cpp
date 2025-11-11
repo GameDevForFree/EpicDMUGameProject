@@ -3,17 +3,18 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Checkpoint.h"
-#include "MainCharacter.h" 
+#include "MainCharacter.h"
+#include "ScoreManager.h"
+#include "Engine/Engine.h"
+#include "Engine/World.h"
 
 ADeathBarrier::ADeathBarrier()
 {
     PrimaryActorTick.bCanEverTick = false;
 
-    
     KillZone = CreateDefaultSubobject<UBoxComponent>(TEXT("KillZone"));
     RootComponent = KillZone;
 
-    
     KillZone->InitBoxExtent(FVector(200.f, 200.f, 100.f));
     KillZone->SetCollisionProfileName(TEXT("Trigger"));
     KillZone->SetGenerateOverlapEvents(true);
@@ -39,10 +40,13 @@ void ADeathBarrier::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
     if (Player)
     {
         
-       Player->RespawnAtCheckpoint();
+        Player->RespawnAtCheckpoint();
 
        
-
-        GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("Player hit death barrier!"));
+        AScoreManager* ScoreManager = Cast<AScoreManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AScoreManager::StaticClass()));
+        if (ScoreManager)
+        {
+            ScoreManager->SubtractScore(15); 
+        }
     }
 }

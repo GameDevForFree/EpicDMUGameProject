@@ -22,13 +22,13 @@ private:
     void UpdateHUD();
     void EndGame();
 
-    // Timer
+   
     FTimerHandle CountdownHandle;
     float TimeRemaining; // in seconds
 
-    // HUD
+    
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI", meta = (AllowPrivateAccess = "true"))
-    TSubclassOf<UUserWidget> TimerWidgetClass; // assign WBP_ScoreHUD in Editor
+    TSubclassOf<UUserWidget> TimerWidgetClass; 
 
     UUserWidget* TimerWidgetInstance;
     UTextBlock* TimerTextBlock;

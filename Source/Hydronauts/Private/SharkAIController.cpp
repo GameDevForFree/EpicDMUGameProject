@@ -37,7 +37,7 @@ void ASharkAIController::Tick(float DeltaSeconds)
         if (!bHasPlayedSound && SharkSFX)
         {
             UGameplayStatics::PlaySoundAtLocation(this, SharkSFX, ControlledPawn->GetActorLocation());
-            bHasPlayedSound = true; // mark as played
+            bHasPlayedSound = true; 
         }
     }
     else

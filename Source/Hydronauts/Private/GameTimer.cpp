@@ -7,7 +7,7 @@
 AGameTimer::AGameTimer()
 {
     PrimaryActorTick.bCanEverTick = false;
-    TimeRemaining = 1500.f; // 25 minutes in seconds
+    TimeRemaining = 900.f;
     TimerWidgetInstance = nullptr;
     TimerTextBlock = nullptr;
 }
@@ -16,7 +16,7 @@ void AGameTimer::BeginPlay()
 {
     Super::BeginPlay();
 
-    // Spawn the HUD widget
+    
     if (TimerWidgetClass)
     {
         TimerWidgetInstance = CreateWidget<UUserWidget>(GetWorld(), TimerWidgetClass);
@@ -24,12 +24,12 @@ void AGameTimer::BeginPlay()
         {
             TimerWidgetInstance->AddToViewport();
 
-            // Find the TextBlock inside the widget
+            
             TimerTextBlock = Cast<UTextBlock>(TimerWidgetInstance->GetWidgetFromName(TEXT("TimerText")));
         }
     }
 
-    // Start ticking every second
+    
     GetWorldTimerManager().SetTimer(CountdownHandle, this, &AGameTimer::UpdateHUD, 1.0f, true);
 }
 
@@ -41,7 +41,7 @@ void AGameTimer::UpdateHUD()
         return;
     }
 
-    // Format MM:SS
+    
     int Minutes = FMath::FloorToInt(TimeRemaining / 60);
     int Seconds = FMath::FloorToInt(FMath::Fmod(TimeRemaining, 60));
     FString TimerString = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
@@ -58,6 +58,6 @@ void AGameTimer::EndGame()
 {
     GetWorldTimerManager().ClearTimer(CountdownHandle);
 
-    // Replace with your end level
-    UGameplayStatics::OpenLevel(this, FName("MainMenu"));
+    
+    UGameplayStatics::OpenLevel(this, FName("LVL_MainMenu"));
 }

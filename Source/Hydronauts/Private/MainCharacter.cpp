@@ -1,6 +1,4 @@
-﻿// This is all code by Michael Threlfall P2797637, Cory P2803594, and Devin Brown P2798179
-
-#include "MainCharacter.h"
+﻿#include "MainCharacter.h"
 #include "HydroSaveGame.h"
 #include "SharkAIController.h"
 #include "Kismet/GameplayStatics.h"
@@ -12,7 +10,7 @@
 #include "TimerManager.h"
 #include "Engine/Engine.h"
 
-// -------------------- Code Added Below by Cory P2803594 --------------------
+// Code Added Below by Cory P2803594
 
 AMainCharacter::AMainCharacter()
 {
@@ -23,7 +21,7 @@ void AMainCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-    // Save the starting position as the initial checkpoint
+    
     LastCheckpointLocation = GetActorLocation();
 
     if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -86,7 +84,7 @@ void AMainCharacter::Jumping()
     Jump();
 }
 
-// -------------------- Added by Devin Brown P2798179 --------------------
+// Added by Devin Brown P2798179 
 
 void AMainCharacter::SaveGame()
 {
@@ -104,7 +102,6 @@ void AMainCharacter::LoadGame()
     SetActorRotation(LoadGameInstance->WorldRotation);
 }
 
-// -------------------- Respawn System --------------------
 
 void AMainCharacter::RespawnAtCheckpoint()
 {
@@ -114,30 +111,14 @@ void AMainCharacter::RespawnAtCheckpoint()
         PC->DisableInput(PC);
     }
 
-    GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, TEXT("You Died! Respawning..."));
 
-    if (PC && PC->PlayerCameraManager)
+    
+    SetActorLocation(LastCheckpointLocation);
+    GetCharacterMovement()->Velocity = FVector::ZeroVector;
+
+
+    if (PC)
     {
-        PC->PlayerCameraManager->StartCameraFade(0.f, 1.f, 1.f, FLinearColor::Black, false, true);
+        PC->EnableInput(PC);
     }
-
-    FTimerHandle RespawnTimerHandle;
-    GetWorldTimerManager().SetTimer(RespawnTimerHandle, [this, PC]()
-        {
-            SetActorLocation(LastCheckpointLocation);
-            GetCharacterMovement()->Velocity = FVector::ZeroVector;
-
-            if (PC && PC->PlayerCameraManager)
-            {
-                PC->PlayerCameraManager->StartCameraFade(1.f, 0.f, 1.f, FLinearColor::Black, false, true);
-            }
-
-            GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Respawned at checkpoint!"));
-
-            if (PC)
-            {
-                PC->EnableInput(PC);
-            }
-
-        }, 2.0f, false);
 }

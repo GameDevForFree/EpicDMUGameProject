@@ -3,7 +3,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
-#include "MainCharacter.h" // Replace with your character class header
+#include "MainCharacter.h" 
 
 ACheckpoint::ACheckpoint()
 {
@@ -36,6 +36,5 @@ void ACheckpoint::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Ot
         bIsActive = true;
         Player->SetCheckpointLocation(GetActorLocation());
 
-        GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, TEXT("Checkpoint Activated!"));
     }
 }

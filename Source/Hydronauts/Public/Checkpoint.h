@@ -19,7 +19,7 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     class UBoxComponent* TriggerBox;
 
-    // Whether this checkpoint has been activated
+    
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     bool bIsActive;
 

@@ -17,6 +17,13 @@ void AScoreManager::AddScore(int32 Points)
     UpdateHUD();
 }
 
+void AScoreManager::SubtractScore(int32 Points)
+{
+    
+    PlayerScore = FMath::Max(PlayerScore - Points, 0);
+    UpdateHUD();
+}
+
 void AScoreManager::UpdateHUD()
 {
     if (!ScoreWidgetInstance && ScoreWidgetClass)
@@ -25,7 +32,7 @@ void AScoreManager::UpdateHUD()
         if (ScoreWidgetInstance)
             ScoreWidgetInstance->AddToViewport();
 
-        // Find the TextBlock inside the widget
+       
         ScoreTextBlock = Cast<UTextBlock>(ScoreWidgetInstance->GetWidgetFromName(TEXT("ScoreText")));
     }
 

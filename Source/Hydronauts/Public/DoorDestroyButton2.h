@@ -19,6 +19,9 @@ protected:
     UPROPERTY(VisibleAnywhere)
     class UBoxComponent* ButtonTrigger;
 
+    UPROPERTY(EditAnywhere, Category = "Audio")
+    USoundBase* ButtonPushSFX;
+
     UFUNCTION()
     void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
         UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,

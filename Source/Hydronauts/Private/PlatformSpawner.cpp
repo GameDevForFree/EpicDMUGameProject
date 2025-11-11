@@ -53,15 +53,6 @@ void APlatformSpawner::SpawnPlatformAt(const FVector& Location, const FRotator& 
     if (UWorld* World = GetWorld())
     {
         AActor* SpawnedPlatform = World->SpawnActor<AActor>(PlatformToSpawn, Location, Rotation);
-
-        if (SpawnedPlatform)
-        {
-            if (GEngine)
-            {
-                GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green,
-                    FString::Printf(TEXT("Platform spawned successfully: %s"), *SpawnedPlatform->GetName()));
-            }
-        }
   
         }
     }

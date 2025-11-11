@@ -28,6 +28,10 @@ ADoorDestroyButton::ADoorDestroyButton()
     ButtonTrigger->SetupAttachment(RootComponent);
     ButtonTrigger->SetBoxExtent(FVector(50.f));
     ButtonTrigger->OnComponentBeginOverlap.AddDynamic(this, &ADoorDestroyButton::OnOverlap);
+
+    static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/woodsfx.woodsfx"));
+    if (SoundAsset.Succeeded())
+        ButtonPushSFX = SoundAsset.Object;
 }
 
 void ADoorDestroyButton::OnOverlap(
@@ -51,10 +55,11 @@ void ADoorDestroyButton::OnOverlap(
     {
         if (Door->ActorHasTag("MainDoor"))
         {
+            if (ButtonPushSFX)
+                UGameplayStatics::PlaySoundAtLocation(this, ButtonPushSFX, GetActorLocation());
+
             Door->Destroy();
 
-            if (GEngine)
-                GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("MainDoor destroyed!"));
             break;
         }
     }

@@ -1,6 +1,3 @@
-
-
-
 #include "AudioTunnels.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -35,7 +32,7 @@ void AAudioTunnels::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// UGameplayStatics::PlaySoundAtLocation(this, AudioTunnelSFX, GetActorLocation());
+	UGameplayStatics::PlaySoundAtLocation(this, AudioTunnelSFX, GetActorLocation());
 	
 }
 

@@ -47,9 +47,6 @@ void AButtonSpawnPlatPress::BeginPlay()
 {
     Super::BeginPlay();
     ButtonMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-    if (GEngine)
-        GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Yellow, TEXT("ButtonSpawnPlatPress ready."));
 }
 
 void AButtonSpawnPlatPress::OnMeshBeginOverlap(
@@ -76,15 +73,6 @@ void AButtonSpawnPlatPress::OnMeshBeginOverlap(
 
         
         APlatformSpawner* Spawner = World->SpawnActor<APlatformSpawner>(APlatformSpawner::StaticClass(), SpawnPos, SpawnRot);
-
-        if (Spawner && GEngine)
-        {
-            GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("PlatformSpawner spawned successfully!"));
-        }
-        else if (GEngine)
-        {
-            GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("PlatformSpawner failed to spawn."));
-        }
     }
 
     bPlatformHasSpawned = true;
