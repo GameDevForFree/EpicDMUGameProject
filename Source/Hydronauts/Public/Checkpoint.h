@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -14,16 +16,18 @@ public:
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-    class UStaticMeshComponent* CheckpointMesh;
+    class UStaticMeshComponent* CheckpointMesh; // visible 3D mesh for the checkpoint, viewable only in editor
 
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-    class UBoxComponent* TriggerBox;
+    class UBoxComponent* TriggerBox; // the invisible box that detects overlaps when the player enters
 
     
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-    bool bIsActive;
+    bool bIsActive; // responsible in knowing if the current checkpoint is active or not
 
     virtual void BeginPlay() override;
+
+    // function that runs when something overlaps the trigger
 
 public:
     UFUNCTION()

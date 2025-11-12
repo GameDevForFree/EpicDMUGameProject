@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// All code here is by Alex Robertson P2607829
+
+#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -14,11 +16,15 @@ public:
 
     virtual void Tick(float DeltaTime) override;  
 
+    // function to spawn a platform at a specific location and rotation
+
     UFUNCTION(BlueprintCallable, Category = "Platform Spawning")
     void SpawnPlatformAt(const FVector& Location, const FRotator& Rotation);
 
 protected:
     virtual void BeginPlay() override;
+
+    // components/variables
 
 public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Platform Spawning")

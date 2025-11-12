@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,6 +15,8 @@ class HYDRONAUTS_API ADeathBarrier : public AActor
 public:
     ADeathBarrier();
 
+    // components/variables
+
 protected:
   
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Death Barrier")
@@ -23,6 +27,8 @@ protected:
     class UStaticMeshComponent* BarrierMesh;
 
     virtual void BeginPlay() override;
+
+    // function that runs when something overlaps the trigger
 
 public:
     UFUNCTION()
