@@ -6,13 +6,14 @@
 #include "AIController.h"
 #include "SharkAIController2.generated.h"
 
-/**
-
-*/
 UCLASS()
 class HYDRONAUTS_API ASharkAIController2 : public AAIController
 {
     GENERATED_BODY()
+
+public:
+
+    ASharkAIController2();
 
 protected:
     virtual void BeginPlay() override;

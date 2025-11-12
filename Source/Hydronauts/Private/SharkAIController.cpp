@@ -1,15 +1,15 @@
 ﻿// All code by Michael Threlfall P2797637
 
-
-#include "SharkAIController2.h"
+#include "SharkAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
+#include "UObject/ConstructorHelpers.h" // needed for FObjectFinder
 
-void ASharkAIController2::BeginPlay()
+ASharkAIController::ASharkAIController()
 {
-    Super::BeginPlay();
-    // Gets the players character
-    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    PrimaryActorTick.bCanEverTick = true;
+
+    bHasPlayedSound = false;
 
     // gets the audio file and assigns it to the SoundAsset object variable
     static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tralalerotralala.tralalerotralala"));
@@ -18,8 +18,15 @@ void ASharkAIController2::BeginPlay()
         SharkSFX = SoundAsset.Object;
     }
 }
+void ASharkAIController::BeginPlay()
+{
+    Super::BeginPlay();
+    // Gets the players character
+    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
-void ASharkAIController2::Tick(float DeltaSeconds)
+}
+
+void ASharkAIController::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     // Shark will only focus on and move towards the player if it has a direct line of sight
@@ -30,7 +37,7 @@ void ASharkAIController2::Tick(float DeltaSeconds)
             SetFocus(PlayerPawn);
             MoveToActor(PlayerPawn, 5.0f);
 
-            // plays the audio at the players locations and makes sure it only plays once
+            // plays the audio at the players locations and makes sure it only plays once 
             if (!bHasPlayedSound && SharkSFX)
             {
                 UGameplayStatics::PlaySoundAtLocation(this, SharkSFX, PlayerPawn->GetActorLocation());

@@ -1,15 +1,15 @@
 // All code by Michael Threlfall P2797637
 
-
 #include "SharkAIController2.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
+#include "UObject/ConstructorHelpers.h" // needed for FObjectFinder
 
-void ASharkAIController2::BeginPlay()
+ASharkAIController2::ASharkAIController2()
 {
-    Super::BeginPlay();
-    // Gets the players character
-    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 1);
+    PrimaryActorTick.bCanEverTick = true;
+
+    bHasPlayedSound = false;
 
     // gets the audio file and assigns it to the SoundAsset object variable
     static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tralalerotralala.tralalerotralala"));
@@ -17,6 +17,13 @@ void ASharkAIController2::BeginPlay()
     {
         SharkSFX = SoundAsset.Object;
     }
+}
+void ASharkAIController2::BeginPlay()
+{
+    Super::BeginPlay();
+    // Gets the players character
+    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 1);
+
 }
 
 void ASharkAIController2::Tick(float DeltaSeconds)
