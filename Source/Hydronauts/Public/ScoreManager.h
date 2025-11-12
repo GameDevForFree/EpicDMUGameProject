@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -14,6 +16,8 @@ class HYDRONAUTS_API AScoreManager : public AActor
 
 public:
     AScoreManager();
+
+    // components/variables
 
     UFUNCTION(BlueprintCallable, Category = "Score")
     void AddScore(int32 Points);

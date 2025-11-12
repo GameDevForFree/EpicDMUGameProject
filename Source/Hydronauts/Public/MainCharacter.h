@@ -16,7 +16,7 @@ public:
 
 	FVector LastCheckpointLocation;
 
-//Code below by Alex
+//Code below by Alex Robertson P2607829
 
 public:
 	void SetCheckpointLocation(FVector NewLocation) { LastCheckpointLocation = NewLocation; }

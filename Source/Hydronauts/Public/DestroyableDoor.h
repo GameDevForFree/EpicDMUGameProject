@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -20,6 +22,8 @@ protected:
 public:	
 
 	virtual void Tick(float DeltaTime) override;
+
+	// ---------------------------- OLD REMNANT CODE LEFT BEHIND / TOO LATE IN DEVELOPMENT TO REMOVE IN FEAR OF BREAKING SOMETHING 
 
 	UFUNCTION(BlueprintCallable, Category = "Door Spawning")
 	void DoorToSpawnAt(const FVector& Location, const FRotator& Rotation);

@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -11,11 +13,13 @@ class HYDRONAUTS_API AAudioTunnels : public AActor
 	
 public:	
 	
-	AAudioTunnels();
+	AAudioTunnels(); 
 
 protected:
 	
 	virtual void BeginPlay() override;
+
+	// components/variables
 
 	UPROPERTY(EditAnywhere, Category = "Audio")
 	USoundBase* AudioTunnelSFX;

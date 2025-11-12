@@ -21,8 +21,8 @@ void AMainCharacter::BeginPlay()
 {
     Super::BeginPlay();
 
-    
-    LastCheckpointLocation = GetActorLocation();
+    // retrieves the current world position of the actor and stores it
+    LastCheckpointLocation = GetActorLocation(); // <--- Code by Alex Robertson P2607829
 
     if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
     {
@@ -102,7 +102,9 @@ void AMainCharacter::LoadGame()
     SetActorRotation(LoadGameInstance->WorldRotation);
 }
 
+//Code below by Alex Robertson P2607829
 
+// retrieves the controller that possesses the main character and disables it
 void AMainCharacter::RespawnAtCheckpoint()
 {
     APlayerController* PC = Cast<APlayerController>(GetController());
@@ -112,10 +114,11 @@ void AMainCharacter::RespawnAtCheckpoint()
     }
 
 
-    
+    // instantly teleports the character back to the saved checkpoint location and resets the character's velocity to zero
     SetActorLocation(LastCheckpointLocation);
     GetCharacterMovement()->Velocity = FVector::ZeroVector;
 
+    // re-enables movement 
 
     if (PC)
     {

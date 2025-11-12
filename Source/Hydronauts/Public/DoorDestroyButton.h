@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -12,6 +14,8 @@ class HYDRONAUTS_API ADoorDestroyButton : public AActor
 public:
     ADoorDestroyButton();
 
+    // components/variables
+
 protected:
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* ButtonMesh;
@@ -21,6 +25,8 @@ protected:
 
     UPROPERTY(EditAnywhere, Category = "Audio")
     USoundBase* ButtonPushSFX;
+
+    // function that runs when something overlaps the trigger
 
     UFUNCTION()
     void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

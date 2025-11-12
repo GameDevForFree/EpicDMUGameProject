@@ -1,3 +1,5 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,13 +15,15 @@ public:
     AJumpBoost();
 
     UFUNCTION()
-    void RespawnPowerUp();
+    void RespawnPowerUp(); // function that respawns the power up
 
 protected:
     virtual void BeginPlay() override;
 
 public:
     virtual void Tick(float DeltaTime) override;
+
+    // components/variables
 
 private:
     UPROPERTY(VisibleAnywhere)
@@ -36,6 +40,8 @@ private:
 
     UPROPERTY(EditAnywhere, Category = "Audio")
     class USoundBase* JBCollectChime;
+
+    // function that runs when something overlaps the trigger
 
     UFUNCTION()
     void OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,

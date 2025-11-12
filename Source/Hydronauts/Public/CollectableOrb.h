@@ -1,8 +1,12 @@
+// All code here is by Alex Robertson P2607829
+
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CollectableOrb.generated.h"
+
+// tells the compiler these classes exist, speeds things up
 
 class UStaticMeshComponent;
 class UBoxComponent;
@@ -20,6 +24,8 @@ protected:
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
 
+    // components/variables
+
     UPROPERTY(VisibleAnywhere)
     UStaticMeshComponent* OrbMesh;
 
@@ -28,6 +34,8 @@ protected:
 
     UPROPERTY(EditAnywhere)
     USoundBase* OrbCollectChime;
+
+    // function that runs when something overlaps the trigger
 
     UFUNCTION()
     void OnMeshBeginOverlap(
