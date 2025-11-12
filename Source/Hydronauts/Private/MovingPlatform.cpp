@@ -13,10 +13,10 @@ AMovingPlatform::AMovingPlatform()
 	RootComponent = BoxCollider;
 
 	PlatformMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Platform's Mesh"));
-	PlatformMesh->SetupAttachment(RootComponent);
+	PlatformMesh->SetupAttachment(RootComponent); // attatches platform mesh to the root component which is the box collider
 
 	MovementComponent = CreateDefaultSubobject<UInterpToMovementComponent>(TEXT("Movement Component"));
-	// setting values for components of the moving platform
+	// setting values for MovementComponent of the moving platform
 	MovementComponent->Duration = 5.0f;
 	MovementComponent->bSweep = true;
 	MovementComponent->BehaviourType = EInterpToBehaviourType::PingPong;

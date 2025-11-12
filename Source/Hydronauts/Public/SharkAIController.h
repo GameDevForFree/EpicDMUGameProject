@@ -24,5 +24,5 @@ protected:
 
 private:
     APawn* PlayerPawn;
-    bool bHasPlayedSound = false; // only play once
+    bool bHasPlayedSound = false; // Once the boolean is set to true, the audio will play
 };

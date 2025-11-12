@@ -1,12 +1,17 @@
-﻿// This is all code by Michael Threlfall P2797637
+﻿// All code by Michael Threlfall P2797637
 
-#include "SharkAIController.h"
+
+#include "SharkAIController2.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/Character.h"
-#include "UObject/ConstructorHelpers.h"
 
-ASharkAIController::ASharkAIController()
+void ASharkAIController2::BeginPlay()
 {
+    Super::BeginPlay();
+    // Gets the players character
+    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+
+    // gets the audio file and assigns it to the SoundAsset object variable
     static ConstructorHelpers::FObjectFinder<USoundBase> SoundAsset(TEXT("/Game/Audio/tralalerotralala.tralalerotralala"));
     if (SoundAsset.Succeeded())
     {
@@ -14,35 +19,29 @@ ASharkAIController::ASharkAIController()
     }
 }
 
-void ASharkAIController::BeginPlay()
-{
-    Super::BeginPlay();
-    PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-}
-
-void ASharkAIController::Tick(float DeltaSeconds)
+void ASharkAIController2::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-
-    APawn* ControlledPawn = GetPawn();
-    if (!ControlledPawn || !PlayerPawn)
-        return;
-
-    if (LineOfSightTo(PlayerPawn))
+    // Shark will only focus on and move towards the player if it has a direct line of sight
+    if (PlayerPawn)
     {
-        SetFocus(PlayerPawn);
-        MoveToActor(PlayerPawn, 5.0f);
-
-       
-        if (!bHasPlayedSound && SharkSFX)
+        if (LineOfSightTo(PlayerPawn))
         {
-            UGameplayStatics::PlaySoundAtLocation(this, SharkSFX, ControlledPawn->GetActorLocation());
-            bHasPlayedSound = true; 
+            SetFocus(PlayerPawn);
+            MoveToActor(PlayerPawn, 5.0f);
+
+            // plays the audio at the players locations and makes sure it only plays once
+            if (!bHasPlayedSound && SharkSFX)
+            {
+                UGameplayStatics::PlaySoundAtLocation(this, SharkSFX, PlayerPawn->GetActorLocation());
+                bHasPlayedSound = true;
+            }
         }
-    }
-    else
-    {
-        ClearFocus(EAIFocusPriority::Gameplay);
-        StopMovement();
+        else
+        {
+            // If the shark loses sight of the player then it will stop following them and lose focus
+            ClearFocus(EAIFocusPriority::Gameplay);
+            StopMovement();
+        }
     }
 }

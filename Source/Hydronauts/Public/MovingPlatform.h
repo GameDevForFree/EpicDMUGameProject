@@ -12,20 +12,18 @@ class HYDRONAUTS_API AMovingPlatform : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AMovingPlatform();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pathing", meta = (ExposeOnSpawn = "true", MakeEditWidget = "true"))
-	TArray<FVector> ThePath;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Paths", meta = (ExposeOnSpawn = "true", MakeEditWidget = "true"))
+	TArray<FVector> ThePath; // new blueprint component called pathing allowing me to place an array of vectors in a 3D space
 
 private:
+	// Components for the moving platform
 	UPROPERTY(EditDefaultsOnly, Category = "Components") class UBoxComponent* BoxCollider;
 	UPROPERTY(EditDefaultsOnly, Category = "Components") class UStaticMeshComponent* PlatformMesh;
 	UPROPERTY(EditDefaultsOnly, Category = "Components") class UInterpToMovementComponent* MovementComponent;
